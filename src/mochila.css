@@ -1,0 +1,156 @@
+body {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  background-color: #fafaff;
+
+  height: 50vh;
+
+  font-family: "Poppins", sans-serif;
+}
+
+.container {
+  margin-top: 40vh;
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  min-width: 380px;
+  min-height: 600px;
+
+  align-items: center;
+
+  box-shadow: 0 0 10px #000;
+
+  border-radius: 8px;
+
+  background-color: white;
+
+  padding: 15px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: soft-light;
+}
+
+.main {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+p,
+label {
+  color: #eee;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+label {
+  padding-left: 7px;
+}
+
+.q_form {
+  display: flex;
+  border-bottom: 1px solid #000;
+}
+
+.input {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.css_label {
+  width: 100px;
+  max-width: 90px;
+  border: none;
+  border-radius: 4px;
+  display: block;
+  height: 33px;
+  padding: 0 15px 0 10px;
+  margin: 0 5px 0 5px;
+  font-weight: 400;
+  margin: auto;
+}
+
+.input_container {
+  margin: 15px 0 15px 0;
+}
+
+.your_weight {
+  border: none;
+  border-radius: 4px;
+
+  width: 230px;
+  height: 33px;
+
+  padding: 0 15px 0 10px;
+
+  font-weight: 400;
+}
+
+.your_weight:first-child {
+  margin-right: 5px;
+}
+
+.your_weight:focus {
+  border: none;
+}
+
+.btn {
+  border: none;
+  border-radius: 4px;
+
+  width: 100px;
+  height: 33px;
+
+  font-size: 16px;
+  font-weight: 500;
+
+  box-shadow: 0 0 5px black;
+  background-color: #fafaff;
+}
+
+.btn:hover {
+  box-shadow: 0 0 2px black;
+  background-color: #f19a3e;
+}
+
+.result {
+  margin-top: 15px;
+
+  font-size: 16px;
+  font-weight: 500;
+  color: #eee;
+
+  max-width: 400px;
+  max-height: 350px;
+  min-width: 200px;
+  text-align: center;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+
+  padding-right: 5px;
+
+  overflow: auto;
+}
+
+.payment-table th {
+
+  padding: 10px 20px;
+}
+
+.table-responsive{
+  align-items: center;
+
+  display: flex;
+  flex-direction: column;
+}
+
+
