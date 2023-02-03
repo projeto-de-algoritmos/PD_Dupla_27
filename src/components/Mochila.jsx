@@ -24,11 +24,14 @@ function Mochilas() {
   const [items, setItems] = useState([]);
   const [result, setResult] = useState();
   const [form, setForm] = useState(initialInputState);
+  const [dinheiro, setDinheiro] = useState(0);
+  const [visibleTroco, setVisibleTroco] = useState(false);
 
   useEffect(() => {}, [items]);
 
   const onSubmit = () => {
     setResult(null);
+    setVisibleTroco(false);
 
     updateItems(form);
   };
@@ -66,7 +69,9 @@ function Mochilas() {
       }
     }
 
+    setDinheiro(dinheiro);
     troco2 = troco;
+    // setTroco2(troco);
 
     addTagItem();
   };
@@ -83,6 +88,55 @@ function Mochilas() {
       troco += iterator.value * iterator.qty;
       const newItems = [...sortedItems];
       setResult(newItems);
+    }
+  };
+
+  const findTotal2 = () => {
+    removeAllOccurrencesColor();
+    setVisibleTroco(true);
+  };
+
+  const removeAllOccurrencesColor = () => {
+    const sortedItems = items.sort((a, b) => a.value - b.value);
+
+    for (const iterator of sortedItems) {
+      if (troco2 < 0) {
+        let newqty = iterator.qty;
+
+        while (newqty > 0 && troco2 < 0) {
+          troco2 += Number(iterator.value);
+          newqty--;
+        }
+        if (troco2 >= 0) {
+          iterator.color = "green";
+        } else {
+          iterator.color = "red";
+        }
+        iterator.qty = newqty;
+
+        if (newqty === 0) {
+          iterator.color = "black";
+        }
+      } else {
+        iterator.color = "green";
+      }
+    }
+
+    setItems(sortedItems);
+    setResult(sortedItems);
+    itemsToRemove();
+  };
+
+  const itemsToRemove = () => {
+    const sortedItems = items.sort((a, b) => a.value - b.value);
+   
+    let i = 0;
+    while (i < sortedItems.length) {
+      if (sortedItems[i].color === "black") {
+        sortedItems.splice(i, 1);
+      } else {
+        i++;
+      }
     }
   };
 
@@ -198,6 +252,59 @@ function Mochilas() {
           <button style={{ marginTop: "20px" }} onClick={findTotal}>
             Adicionar Dinheiro
           </button>
+        </div>
+      </div>
+      <div className="container">
+        <div style={{ maxWidth: "400px", textAlign: "center" }}>
+          <h2> Total </h2>
+          {result && (
+            <div>
+              {items.map((item, index) => {
+                return (
+                  <div className="">
+                    <table className="payment-table table-striped">
+                      <thead>
+                        <tr
+                          style={{
+                            color: item.color === "red" ? "red" : "green",
+                          }}
+                        >
+                          <th scope="col">Nome</th>
+                          <th scope="col">Valor</th>
+                          <th scope="col">Quantidade</th>
+                        </tr>
+                      </thead>
+                      <tbody align="center" className="rendered-table">
+                        <tr
+                          style={{
+                            color: item.color === "red" ? "red" : "green",
+                          }}
+                        >
+                          <td>{item.name}</td>
+                          <td>{item.value}</td>
+                          <td>{item.qty}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                );
+              })}
+              {visibleTroco && (
+                <div style={{ marginTop: "20px" }}>
+                  <div>
+                    <div>Troco: R${(troco2 - (troco2 % 1)).toFixed(2)}</div>
+                    <div>Balas: {((troco2 % 1) * 100).toFixed(0)} </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          <div>
+            <button style={{ marginTop: "20px" }} onClick={findTotal2}>
+              Remover Itens
+            </button>
+          </div>
         </div>
       </div>
     </div>
